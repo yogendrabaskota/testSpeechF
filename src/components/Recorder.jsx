@@ -4,16 +4,18 @@ const Recorder = () => {
     const [isRecording, setIsRecording] = useState(false);
     const [transcription, setTranscription] = useState("");
     const [recognition, setRecognition] = useState(null);
+    const [language, setLanguage] = useState("en-US"); // Default to English
 
     useEffect(() => {
         if (!('webkitSpeechRecognition' in window)) {
             alert("Speech Recognition not supported in this browser.");
             return;
         }
+
         const speechRecognition = new window.webkitSpeechRecognition();
         speechRecognition.continuous = true;
         speechRecognition.interimResults = true;
-        speechRecognition.lang = 'en-US';
+        speechRecognition.lang = language; // Set language dynamically
 
         speechRecognition.onresult = (event) => {
             let finalTranscript = "";
@@ -26,10 +28,11 @@ const Recorder = () => {
         };
 
         setRecognition(speechRecognition);
-    }, []);
+    }, [language]); // Reinitialize on language change
 
     const startRecording = () => {
         if (recognition) {
+            recognition.lang = language; // Update language before starting
             recognition.start();
             setIsRecording(true);
         }
@@ -48,6 +51,17 @@ const Recorder = () => {
 
     return (
         <div className="main-content">
+            <div className="language-selector">
+                <label htmlFor="language">Choose Language: </label>
+                <select
+                    id="language"
+                    value={language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                >
+                    <option value="en-US">English (US)</option>
+                    <option value="ne-NP">Nepali</option>
+                </select>
+            </div>
             <button 
                 onClick={isRecording ? stopRecording : startRecording}
                 className="recorder-btn"

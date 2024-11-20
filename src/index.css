@@ -94,3 +94,19 @@
 .clear-btn:hover {
   background-color: #b71c1c;
 }
+.language-selector {
+  margin-bottom: 20px;
+}
+
+.language-selector label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.language-selector select {
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
