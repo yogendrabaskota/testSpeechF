@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 
-import Apple from './components/apple';
 import Recorder from './components/Recorder';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
